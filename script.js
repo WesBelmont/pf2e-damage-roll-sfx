@@ -125,9 +125,9 @@ function applyDamageSFX(message, flags) {
 
 function applySpellSFX(message, flags) {
     console.log(message)
-
+    
     //only continue if if the message is a spell with a roll
-    if (flags.origin.type !== 'spell' || message.data.roll == undefined) {
+    if (flags.origin?.type !== 'spell' || message.data.roll == undefined) {
         return
     }
     //if the card is an attack that misses, play the miss sfx
@@ -160,9 +160,14 @@ function removeAttackSFX(message, flags) {
     if (outcome === undefined) {
         return
     }
-    if (outcome === 'success' || outcome === 'criticalSuccess') {
-        message.data.sound = ''
-        return
+    //disable default attack sound if the damage is going to be rolled immediately
+    if (game.settings.settings.get('xdy-pf2e-workbench.autoRollDamageForStrike')) {
+        if (game.settings.get('xdy-pf2e-workbench', 'autoRollDamageForStrike')) {
+            if (outcome === 'success' || outcome === 'criticalSuccess') {
+                message.data.sound = ''
+                return
+            }
+        }
     }
     if (outcome === 'failure') {
         message.data.sound = game.settings.get(MODULE_NAME, 'miss')
@@ -176,9 +181,7 @@ function removeAttackSFX(message, flags) {
 
 Hooks.on('createChatMessage', (message) => {
     flags = message.data.flags.pf2e
-    if (!game.settings.get('xdy-pf2e-workbench', 'autoRollDamageForStrike')) {
-        return
-    }
+    
     removeAttackSFX(message, flags)
     applyDamageSFX(message, flags)
     applySpellSFX(message, flags)

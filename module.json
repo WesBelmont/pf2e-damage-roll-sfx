@@ -1,20 +1,7 @@
 {
     "name": "pf2e-damage-roll-sfx",
     "title": "PF2e Damage Roll Sound Effects",
-    "description": "",
-    "version": "0.1.0",
-    "minimumCoreVersion": "9",
-    "compatibleCoreVersion": "9",
-    "scripts": [
-        "script.js"
-    ],
-    "dependencies": [
-        {
-            "name": "xdy-pf2e-workbench",
-            "type": "module"
-        }
-    ],
-    "system": ["pf2e"],
+    "description": "Change dice roll sounds to custom sound effects. Physical damage and spell traditions are included.",
     "author": "WesBelmont",
     "authors": [
         {
@@ -22,6 +9,24 @@
             "discord": "WesBelmont#7510"
         }
     ],
-    "manifest": "",
-    "download": ""
+    "url": "https://github.com/WesBelmont/pf2e-damage-roll-sfx",
+    "flags": {},
+    "version": "0.1.0",
+    "minimumCoreVersion": "9",
+    "compatibleCoreVersion": "9",
+    "scripts": [
+        "script.js"
+    ],
+    "esmodules": [],
+    "styles": [],
+    "languages": [],
+    "packs": [],
+    "system": ["pf2e"],
+    "dependencies": [],
+    "socket": false,
+    "manifest": "https://github.com/WesBelmont/pf2e-damage-roll-sfx/releases/download/0.1.0/module.json",
+    "download": "https://github.com/WesBelmont/pf2e-damage-roll-sfx/releases/download/0.1.0/module.zip",
+    "protected": false,
+    "coreTranslation": false,
+    "library": false
 }
