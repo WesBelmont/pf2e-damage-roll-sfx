@@ -110,22 +110,18 @@ function applyDamageSFX(message, flags) {
     if(!flags?.damageRoll) {
         return
     }
-    //set hit/crit mode
-    outcome = (flags.damageRoll.outcome);
     //set damage types
-    damageType = []
+    let damageType = []
     for (const key in flags.damageRoll.types) {
         if (key == 'slashing' || key == 'piercing' || key == 'bludgeoning') {
             damageType.push(key)
         }
     }
-    message.data.sound = game.settings.get(MODULE_NAME, `${randomChoice(damageType)}-${outcome}`)
+    message.data.sound = game.settings.get(MODULE_NAME, `${randomChoice(damageType)}-${flags.damageRoll.outcome}`)
     
 }
 
 function applySpellSFX(message, flags) {
-    console.log(message)
-    
     //only continue if if the message is a spell with a roll
     if (flags.origin?.type !== 'spell' || message.data.roll == undefined) {
         return
@@ -141,8 +137,8 @@ function applySpellSFX(message, flags) {
         }
         return
     }
-    spellTags = ['arcane', 'divine', 'occult', 'primal']
-    spellType = []
+    const spellTags = ['arcane', 'divine', 'occult', 'primal']
+    const spellType = []
     spellTags.forEach(element => {
         if (message.data.flavor.includes(element)){
             spellType.push(element)
@@ -156,7 +152,7 @@ function removeAttackSFX(message, flags) {
     if (flags?.context?.type != 'attack-roll') {
         return
     }
-    outcome = flags.context.outcome
+    const outcome = flags.context.outcome
     if (outcome === undefined) {
         return
     }
@@ -180,7 +176,7 @@ function removeAttackSFX(message, flags) {
 }
 
 Hooks.on('createChatMessage', (message) => {
-    flags = message.data.flags.pf2e
+    let flags = message.data.flags.pf2e
     
     removeAttackSFX(message, flags)
     applyDamageSFX(message, flags)
