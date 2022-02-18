@@ -1,4 +1,4 @@
-MODULE_NAME = 'pf2e-damage-roll-sfx';
+const MODULE_NAME = 'pf2e-damage-roll-sfx';
 
 Hooks.on('init', () => {
     game.settings.register(MODULE_NAME, 'bludgeoning-success', {
